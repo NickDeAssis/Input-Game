@@ -29,9 +29,9 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Buttons"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""a6966c52-4228-4b95-a6d6-b721f5c2e036"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -50,7 +50,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d6a2b99b-a3f6-40ec-abae-750a314b24d5"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

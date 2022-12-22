@@ -13,6 +13,7 @@ public class PlayerController2 : MonoBehaviour
     void Awake()
     {
         controls = new PlayerController();
+        controls.Player.Buttons.performed += ctx => Shoot();
         controls.Player.Move.performed += ctx => SendMessage(ctx.ReadValue<Vector2>());
         controls.Player.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => move = Vector2.zero;
@@ -31,6 +32,11 @@ public class PlayerController2 : MonoBehaviour
     void SendMessage(Vector2 coordinates)
     {
         Debug.Log("Button Coordinates = "+ coordinates);
+    }
+
+    void Shoot()
+    {
+        Debug.Log("Fire");
     }
     void FixedUpdate()
     {
