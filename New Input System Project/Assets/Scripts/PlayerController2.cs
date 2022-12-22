@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController2 : MonoBehaviour
 {
-
+    private Rigidbody rb;
     PlayerController controls;
     Vector2 move;
     public float speed = 10;
@@ -17,6 +17,7 @@ public class PlayerController2 : MonoBehaviour
         controls.Player.Move.performed += ctx => SendMessage(ctx.ReadValue<Vector2>());
         controls.Player.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => move = Vector2.zero;
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
@@ -41,6 +42,7 @@ public class PlayerController2 : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 movement = new Vector3(move.x, 0.0f, move.y) * speed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
+        //transform.Translate(movement, Space.World);
+        rb.AddForce(movement * speed * Time.deltaTime);
     }
 }
