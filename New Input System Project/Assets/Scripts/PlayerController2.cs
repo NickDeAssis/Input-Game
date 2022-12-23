@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerController2 : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerController2 : MonoBehaviour
     PlayerController controls;
     Vector2 move;
     public float speed = 10;
+    public TextMeshProUGUI countText;
+    private int count;
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,6 +21,9 @@ public class PlayerController2 : MonoBehaviour
         controls.Player.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => move = Vector2.zero;
         rb = GetComponent<Rigidbody>();
+        count = 0;
+
+        SetCountText();
     }
 
     private void OnEnable()
@@ -28,7 +34,11 @@ public class PlayerController2 : MonoBehaviour
     {
         controls.Player.Disable();
     }
-    // Update is called once per frame
+    
+    void SetCountText()
+    {
+        countText.text = "Count: " + count.ToString();
+    }
     
     void SendMessage(Vector2 coordinates)
     {
@@ -44,5 +54,18 @@ public class PlayerController2 : MonoBehaviour
         Vector3 movement = new Vector3(move.x, 0.0f, move.y) * speed * Time.deltaTime;
         transform.Translate(movement, Space.World);
         //rb.AddForce(movement * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Collectible"))
+        {
+            Destroy(other.gameObject);
+            count = count +1;
+            Debug.Log(count);
+
+            SetCountText();
+        }
+
     }
 }

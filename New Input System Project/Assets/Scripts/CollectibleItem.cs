@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleRotation : MonoBehaviour
+public class CollectibleItem : MonoBehaviour
 {
     public float rotationSpeed;
     private Vector3 rotationAngle;
@@ -17,4 +17,13 @@ public class CollectibleRotation : MonoBehaviour
     {
         transform.Rotate(new Vector3(45,30,15)* rotationSpeed * Time.deltaTime);
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.gameObject.tag == "Player")
+    //    {
+    //        Destroy(gameObject);
+    //    }
+        
+    //}
 }
