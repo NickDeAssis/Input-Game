@@ -11,6 +11,7 @@ public class PlayerController2 : MonoBehaviour
     Vector2 move;
     public float speed = 10;
     public TextMeshProUGUI countText;
+    public GameObject winTextObject;
     private int count;
     // Start is called before the first frame update
     void Awake()
@@ -24,6 +25,7 @@ public class PlayerController2 : MonoBehaviour
         count = 0;
 
         SetCountText();
+        winTextObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -38,6 +40,10 @@ public class PlayerController2 : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
+        if(count >=12)
+        {
+            winTextObject.SetActive(true);
+        }
     }
     
     void SendMessage(Vector2 coordinates)
@@ -52,8 +58,8 @@ public class PlayerController2 : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 movement = new Vector3(move.x, 0.0f, move.y) * speed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
-        //rb.AddForce(movement * speed * Time.deltaTime);
+        //transform.Translate(movement, Space.World);
+        rb.AddForce(movement * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,7 +68,6 @@ public class PlayerController2 : MonoBehaviour
         {
             Destroy(other.gameObject);
             count = count +1;
-            Debug.Log(count);
 
             SetCountText();
         }
